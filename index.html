@@ -1,0 +1,83 @@
+<html>
+
+<script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+<script src="js/parse.js"></script>
+<script src="js/main.js" defer></script>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>MaxLoad Calculator</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+ <article class="l-design-widht">
+  <div class="card">
+    <h2><svg class="icon" aria-hidden="true">
+      <use xlink:href="#icon-building" href="#icon-building" /></svg>Concrete Max Load Calculator</h2>
+    <label class="input">
+      <input id="frictionAngle"  class="input__field" type="number" step="0.01" placeholder="Friction Angle " />
+      <span class="input__label">Input Friction Angle Here</span>
+    </label>
+    <div class="button-group">
+      <button id="chkMaxLoadBtn" onclick="read()">Find Max Load</button>
+    </div>
+     <div class="button-group">
+      <button id="getDepthsBtn" onclick="displayDepthValues()">Get Depths</button>
+    </div>
+		<div class="button-group">
+      <button id="getDepthsAPIBtn" onclick="getDepthsApi()">Get Depths via REST</button>
+    </div>
+     <div class="button-group">
+      <button id="calcMaxLoad" onclick="calcLoad()">Calculate Max Load</button>
+    </div>
+     <div>
+        <h3>Value User Selected:</h3>  
+        <p id="inputValue"></p>
+        <h3>Max Load Results:</h3>  
+        <p id="resultValue"></p>
+    </div>
+  <div>
+    <ul id="depthList">
+      <li id=depth0> Depth 0: </li>
+      <li id=depth1-8> Depth 1/8: </li>
+      <li id=depth1-4> Depth 1/4: </li>
+      <li id=depth1-2> Depth 1/2: </li>
+      <li id=depth1> Depth 1: </li>
+      <li id=depth2> Depth 2: </li>
+      <li id=depth3> Depth 3: </li>
+      <li id=depth4> Depth 4: </li>
+      <li id=depth5> Depth 5: </li>
+      <li id=depth6> Depth 6: </li>
+      <li id=depth7> Depth 7: </li>
+      <li id=depth8> Depth 8: </li>
+      <li id=depth9> Depth 9: </li>
+      <li id=depth10> Depth 10: </li>
+    </ul>
+       <p id="last_updated"></p>
+  </div>
+  </div>
+   
+</article>
+ 
+ 
+<svg xmlns="http://www.w3.org/2000/svg" class="hidden">
+  <symbol id="icon-coffee" viewBox="0 0 20 20">
+    <title>icon-coffee</title>
+    <path fill="currentColor" d="M15,17H14V9h3a3,3,0,0,1,3,3h0A5,5,0,0,1,15,17Zm1-6v3.83A3,3,0,0,0,18,12a1,1,0,0,0-1-1Z"/>
+    <rect fill="currentColor" x="1" y="7" width="15" height="12" rx="3" ry="3"/>
+    <path fill="var(--color-accent)" d="M7.07,5.42a5.45,5.45,0,0,1,0-4.85,1,1,0,0,1,1.79.89,3.44,3.44,0,0,0,0,3.06,1,1,0,0,1-1.79.89Z"/>
+    <path fill="var(--color-accent)" d="M3.07,5.42a5.45,5.45,0,0,1,0-4.85,1,1,0,0,1,1.79.89,3.44,3.44,0,0,0,0,3.06,1,1,0,1,1-1.79.89Z"/>
+    <path fill="var(--color-accent)" d="M11.07,5.42a5.45,5.45,0,0,1,0-4.85,1,1,0,0,1,1.79.89,3.44,3.44,0,0,0,0,3.06,1,1,0,1,1-1.79.89Z"/>
+  </symbol>
+</svg>
+ <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building" viewBox="0 0 16 16"> 
+	<symbol id="icon-building" viewBox="0 0 20 20">
+	<path fill-rule="evenodd" d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694 1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z"/> 
+	<path d="M2 11h1v1H2v-1zm2 0h1v1H4v-1zm-2 2h1v1H2v-1zm2 0h1v1H4v-1zm4-4h1v1H8V9zm2 0h1v1h-1V9zm-2 2h1v1H8v-1zm2 0h1v1h-1v-1zm2-2h1v1h-1V9zm0 2h1v1h-1v-1zM8 7h1v1H8V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zM8 5h1v1H8V5zm2 0h1v1h-1V5zm2 0h1v1h-1V5zm0-2h1v1h-1V3z"/> 
+	</symbol>
+</svg>  
+</body>
+
+</html>
