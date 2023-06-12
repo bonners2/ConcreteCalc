@@ -1,8 +1,8 @@
 //Paste your Application Key and JavaScript Key, respectively
-Parse.initialize("2MEZ3LMPsVWsl5unTxq5xcGxRS7kXUScloOFpC9t", "TarG009MXxBSkzI5BNeOFNeQaXmMh22EQxs0QQCW");
+Parse.initialize("x", "x");
 Parse.serverURL = "https://parseapi.back4app.com/";
 //Paste your Application Key and JavaScript Key, respectively
-Parse.initialize("2MEZ3LMPsVWsl5unTxq5xcGxRS7kXUScloOFpC9t", "TarG009MXxBSkzI5BNeOFNeQaXmMh22EQxs0QQCW");
+Parse.initialize("x", "x");
 Parse.serverURL = "https://parseapi.back4app.com/";
 
 var maxLoad = Parse.Object.extend("maxLoad");
@@ -243,6 +243,9 @@ function iterateDepths(frictionAngle){
 
 function getDepthsApi() {
   x = getFrictionAngle();
+  result = "Value input is: "+x;
+  document.getElementById("inputValue").innerHTML = result;    
+
   if(checkIfKnown(x)===true){
       const options = {
             method: 'GET',
@@ -254,48 +257,47 @@ function getDepthsApi() {
           fetch('https://concrete.b4a.io/classes/maxLoad?where=%7B%20%22frictionAngle%22%3A%20'+x+'%7D', options)
             .then(response => response.json())
             .then(response => {
-              console.log("response is: ")
-              console.log(response);
-              
-            console.log("firstObj is: ")
             let firstObj=response.results[0];
-            console.log(firstObj)
             let firstObjLenght=Object.keys(firstObj).length
+            result = 'Load found for required friction angle of: ' + firstObj["frictionAngle"]; 
+            document.getElementById("resultValue").innerHTML = result;    
 
             for (let i = 0; i < Object.keys(firstObj).length; i++){
               //console.log("object "+i+" is: "+Object.keys(firstObj)[i]);
-              let keyName= Object.keys(firstObj)[i]
+              let keyName= Object.keys(firstObj)[i];
               let value=firstObj[keyName];
-              console.log("Key is: "+keyName+ " - whose value is:"+ value+" - Type is: "+typeof value);
+              //console.log("Key is: "+keyName+ " - whose value is:"+ value+" - Type is: "+typeof value);
 
               if (keyName==="dpth_0"){
                 document.getElementById("depth0").innerHTML = "Depth 0: "+ value;    
-              } else if(keyName==="dpth_0"){
-                document.getElementById("depth1-8").innerHTML = "Depth 1/8: "+ value
-              } else if(keyName==="dpth_0"){
-                document.getElementById("depth1-4").innerHTML = "Depth 1/4: "+ value
-              }else if(keyName==="dpth_0"){
-                document.getElementById("depth1-2").innerHTML = "Depth 1/2: "+ value
-              }else if(keyName==="dpth_0"){
-                document.getElementById("depth1").innerHTML = "Depth 1: "+ value
-              }else if(keyName==="dpth_0"){
-                document.getElementById("depth2").innerHTML = "Depth 2: "+ value
-              }else if(keyName==="dpth_0"){
-                document.getElementById("depth3").innerHTML = "Depth 3: "+ value
-              }else if(keyName==="dpth_0"){
-                document.getElementById("depth4").innerHTML = "Depth 4: "+ value
-              }else if(keyName==="dpth_0"){
-                document.getElementById("depth5").innerHTML = "Depth 5: "+ value
-              }else if(keyName==="dpth_0"){
-                document.getElementById("depth6").innerHTML = "Depth 6: "+ value
-              }else if(keyName==="dpth_0"){
-                document.getElementById("depth7").innerHTML = "Depth 7: "+ value
-              }else if(keyName==="dpth_0"){
-                document.getElementById("depth8").innerHTML = "Depth 8: "+ value
-              }else if(keyName==="dpth_0"){
-                document.getElementById("depth9").innerHTML = "Depth 9: "+ value
-              }else if(keyName==="dpth_0"){
-                document.getElementById("depth10").innerHTML = "Depth 10: "+ value
+              } else if(keyName==="dpth_eighth"){
+                document.getElementById("depth1-8").innerHTML = "Depth 1/8: "+ value;
+              } else if(keyName==="dpth_quarter"){
+                document.getElementById("depth1-4").innerHTML = "Depth 1/4: "+ value;
+              }else if(keyName==="dpth_half"){
+                document.getElementById("depth1-2").innerHTML = "Depth 1/2: "+ value;
+              }else if(keyName==="dpth_1"){
+                document.getElementById("depth1").innerHTML = "Depth 1: "+ value;
+              }else if(keyName==="dpth_2"){
+                document.getElementById("depth2").innerHTML = "Depth 2: "+ value;
+              }else if(keyName==="dpth_3"){
+                document.getElementById("depth3").innerHTML = "Depth 3: "+ value;
+              }else if(keyName==="dpth_4"){
+                document.getElementById("depth4").innerHTML = "Depth 4: "+ value;
+              }else if(keyName==="dpth_5"){
+                document.getElementById("depth5").innerHTML = "Depth 5: "+ value;
+              }else if(keyName==="dpth_6"){
+                document.getElementById("depth6").innerHTML = "Depth 6: "+ value;
+              }else if(keyName==="dpth_7"){
+                document.getElementById("depth7").innerHTML = "Depth 7: "+ value;
+              }else if(keyName==="dpth_8"){
+                document.getElementById("depth8").innerHTML = "Depth 8: "+ value;
+              }else if(keyName==="dpth_9"){
+                document.getElementById("depth9").innerHTML = "Depth 9: "+ value;
+              }else if(keyName==="dpth_10"){
+                document.getElementById("depth10").innerHTML = "Depth 10: "+ value;
+              }else{
+                console.log("other fields: "+keyName);
               }
             }
     
@@ -309,6 +311,14 @@ function getDepthsApi() {
       } else{
         //add code here for when input number is now in the current known list
         console.log("unknown input value");
+        let noInput = 'Value Entered is: '+x;
+        result = 'Friction Angle not found. Please inputting a different Friction Angle:'; 
+        document.getElementById("inputValue").innerHTML = noInput; 
+        document.getElementById("resultValue").innerHTML = result;
+
+        
+        //let expValue = calcLoad(x);
+
 
       }
         
@@ -355,12 +365,26 @@ function calcLoad(frictAngle){
 
   //get the friction angle that the user has input in the html input field
   //frictAngle = getFrictionAngle();
-  console.log("depth used for calc is: " +frictAngle);
+  console.log("frictAngle used for calc is: " +frictAngle);
 
   //round up and down to nearest 5 using the input value as basis.
   rUp=roundUp5(frictAngle);
   rDown=roundDown5(frictAngle);
   console.log("roundUp5: "+rUp+" - roundDown5: "+rDown);
+
+  /**
+   * 
+   * get depth values for the rUp and rDown value
+   * calculate all of the below for each set of values value
+   * store in an array....maybe
+   * return array of new updated valuesadd new set of values to DB (this needs more calculations so will have to do it later)
+   * 
+   * steps:
+   * 1-use for loop to get values for each depth rUP value
+   * 2-
+   * 
+   */
+
 
   //calculate the log10 of the two rounded values and return result
   logrUp = calcLog(rUp);
