@@ -250,8 +250,8 @@ function getDepthsApi() {
       const options = {
             method: 'GET',
             headers: {
-              'X-Parse-Application-Id': '2MEZ3LMPsVWsl5unTxq5xcGxRS7kXUScloOFpC9t',
-              'X-Parse-REST-API-Key': 'fzYAEtncudxMrYU1kdRwbXZAVg3BHm7qh1Ib3fI2'
+              'X-Parse-Application-Id': 'x',
+              'X-Parse-REST-API-Key': 'x'
             }
           };
           fetch('https://concrete.b4a.io/classes/maxLoad?where=%7B%20%22frictionAngle%22%3A%20'+x+'%7D', options)
